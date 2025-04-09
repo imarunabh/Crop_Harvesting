@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Prediction Result</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #e8f5e9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .result-box {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .result-box h1 {
+            color: #4CAF50;
+        }
+        .result-box p {
+            font-size: 1.2em;
+            margin-top: 20px;
+        }
+        a {
+            display: inline-block;
+            margin-top: 25px;
+            padding: 10px 20px;
+            text-decoration: none;
+            background: #4CAF50;
+            color: white;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="result-box">
+        <h1>🌱 Predicted Crop</h1>
+        <p>The best suitable crop for your input is: <strong>{{ prediction }}</strong></p>
+        <a href="/">🔁 Try Again</a>
+    </div>
+</body>
+</html>

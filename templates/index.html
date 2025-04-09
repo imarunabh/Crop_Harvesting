@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Crop Prediction</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        async function fetchWeather() {
+            try {
+                const res = await fetch('/fetch_weather');
+                const data = await res.json();
+                if (data.success) {
+                    document.getElementById("rainfall").value = data.rainfall;
+                    document.getElementById("temperature").value = data.temperature;
+                    document.getElementById("humidity").value = data.humidity;
+                }
+            } catch (e) {
+                console.error("Weather fetch failed:", e);
+            }
+        }
+
+        async function fetchPH() {
+            try {
+                const res = await fetch('/fetch_ph');
+                const data = await res.json();
+                if (data.success) {
+                    document.getElementById("ph").value = data.ph;
+                }
+            } catch (e) {
+                console.error("pH fetch failed:", e);
+            }
+        }
+
+        window.onload = function () {
+            fetchWeather();
+            fetchPH();
+        };
+    </script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f7f7f7;
+            padding: 0;
+            margin: 0;
+        }
+        h1 {
+            text-align: center;
+            color: #4CAF50;
+            margin-top: 20px;
+        }
+        form {
+            background: #fff;
+            max-width: 500px;
+            margin: 30px auto;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            display: block;
+            margin-top: 15px;
+            margin-bottom: 5px;
+        }
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button[type="submit"] {
+            margin-top: 20px;
+            width: 100%;
+            padding: 12px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            font-size: 1.1em;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Enter Soil & Weather Data</h1>
+    <form method="POST">
+        <label for="N">Nitrogen (N):</label>
+        <input type="number" name="N" step="0.01" required>
+
+        <label for="P">Phosphorus (P):</label>
+        <input type="number" name="P" step="0.01" required>
+
+        <label for="K">Potassium (K):</label>
+        <input type="number" name="K" step="0.01" required>
+
+        <label for="ph">pH Value:</label>
+        <input type="number" name="ph" id="ph" step="0.01" min="0" max="14" required placeholder="Fetching...">
+
+        <label for="rainfall">Rainfall (mm):</label>
+        <input type="number" name="rainfall" id="rainfall" step="0.01" required placeholder="Fetching...">
+
+        <label for="temperature">Temperature (°C):</label>
+        <input type="number" name="temperature" id="temperature" step="0.01" required placeholder="Fetching...">
+
+        <label for="humidity">Humidity (%):</label>
+        <input type="number" name="humidity" id="humidity" step="0.01" required placeholder="Fetching...">
+
+        <button type="submit">Predict Crop</button>
+    </form>
+</body>
+</html>
